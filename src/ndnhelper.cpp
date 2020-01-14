@@ -4,27 +4,17 @@
 #include <ndn-cxx/encoding/tlv-nfd.hpp>
 #include <ndn-cxx/net/face-uri.hpp>
 #include <iostream>
-void static NdnHelper::FaceCreate(const std::string& host,const std::string& prefix)
-{
-    ndn::Face faceToNFD;
-    ndn::KeyChain appKeyChain;
-    ndn::nfd::Controller controller(faceToNFD,appKeyChain);
-    ndn::nfd::ControlParameters parameters;
-    parameters.setUri(host);
-    controller.start<ndn::nfd::FaceCreateCommand>(parameters,std::bind(&OnFaceCreateSuccess,_1,prefix),&OnFaceCreateFailure);
-    faceToNFD.processEvents();  
-}
 
-void NdnHelper::OnFibAddNextHopSuccess (const ndn::nfd::ControlParameters parameters) {
+void OnFibAddNextHopSuccess (const ndn::nfd::ControlParameters parameters) {
 	printf("Adding next hop in fib succeeded \n");
 }
 
-void NdnHelper::OnFibAddNextHopFailure (const ndn::mgmt::ControlResponse response) {
+void OnFibAddNextHopFailure (const ndn::mgmt::ControlResponse response) {
 	printf("Adding next hop in fib failed \n");
 }
 
 // Get faceId from response and add fib entries for each prefix this IP serves
-void NdnHelper::OnFaceCreateSuccess (const ndn::nfd::ControlParameters parameters, const std::string& PrefixNameStr) {
+void OnFaceCreateSuccess (const ndn::nfd::ControlParameters parameters, const std::string& PrefixNameStr) {
 	if (parameters.hasFaceId()) {
 		unsigned long long faceId = parameters.getFaceId();
 		printf("New face created. Id: %llu \n", faceId);
@@ -49,7 +39,7 @@ void NdnHelper::OnFaceCreateSuccess (const ndn::nfd::ControlParameters parameter
 	}
 }
 
-void NdnHelper::OnFaceCreateFailure (const ndn::mgmt::ControlResponse response) {
+void OnFaceCreateFailure (const ndn::mgmt::ControlResponse response) {
 	unsigned int statusCode = response.getCode();
 	if (statusCode == 409) {
 		printf("Face already exists for this Uri: ");
@@ -71,3 +61,17 @@ void NdnHelper::OnFaceCreateFailure (const ndn::mgmt::ControlResponse response) 
 		std::cout<<response.getText()<<std::endl;
 	}
 }
+
+void NdnHelper::FaceCreate(const std::string& host,const std::string& prefix)
+{
+    ndn::Face faceToNFD;
+    ndn::KeyChain appKeyChain;
+    ndn::nfd::Controller controller(faceToNFD,appKeyChain);
+    ndn::nfd::ControlParameters parameters;
+	//TODO 
+    parameters.setUri(host);
+    controller.start<ndn::nfd::FaceCreateCommand>(parameters,std::bind(&OnFaceCreateSuccess,_1,prefix),&OnFaceCreateFailure);
+    faceToNFD.processEvents();  
+}
+
+
