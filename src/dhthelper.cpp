@@ -3,7 +3,7 @@ dht::DhtRunner *DhtHelper::m_node = new (std::nothrow) dht::DhtRunner;
 
 DhtHelper::DhtHelper()
 {
-    m_mode->run(4222, dht::crypto::generateIdentity(), true);
+    m_node->run(4222, dht::crypto::generateIdentity(), true);
 }
 
 // void DhtHelper::putValue(const std::string &key, const dht::Value &value)
