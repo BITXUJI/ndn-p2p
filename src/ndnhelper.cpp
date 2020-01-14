@@ -1,9 +1,9 @@
-#include "ndnhelper"
+#include "ndnhelper.h"
 #include <ndn-cxx/encoding/block.hpp>
 #include <ndn-cxx/encoding/tlv.hpp>
 #include <ndn-cxx/encoding/tlv-nfd.hpp>
 #include <ndn-cxx/net/face-uri.hpp>
-
+#include <iostream>
 void static NdnHelper::FaceCreate(const std::string& host,const std::string& prefix)
 {
     ndn::Face faceToNFD;
