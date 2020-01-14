@@ -18,7 +18,8 @@ void DhtHelper::getValue(const std::string &key)
         {
             std::cout << "Found value" << *value << std::endl;
         }
-        m_store.insert({key, std::make_shared(values)}); //error
+        //TODO 
+        m_store->insert({key, std::make_shared(values)}); 
         return true;
     }
 }
