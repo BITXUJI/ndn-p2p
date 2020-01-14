@@ -25,7 +25,7 @@ def build(bld):
     bld.program(
         features='cxx',
         target='server-test',
-        source=bld.path.ant_glob(['src/server/*.cpp']),
+        source=bld.path.ant_glob(['src/*.cpp','src/server/*.cpp']),
         includes = "./src",
         use='NDN_CXX OPENDHT GNUTLS',
     )
