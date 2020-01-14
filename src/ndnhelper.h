@@ -9,11 +9,11 @@
 class NdnHelper
 {
 public:
-    void static FaceCreate(const std::string& host,const std::string& prefix);
-private:
-    void OnFibAddNextHopSuccess (const ndn::nfd::ControlParameters parameters);
-    void OnFibAddNextHopFailure (const ndn::mgmt::ControlResponse response);
-    void OnFaceCreateSuccess (const ndn::nfd::ControlParameters parameters, const std::string& PrefixNameStr);
-    void OnFaceCreateFailure (const ndn::mgmt::ControlResponse response);
+    void static FaceCreate(const std::string &host, const std::string &prefix);
 
+private:
+    void OnFibAddNextHopSuccess(const ndn::nfd::ControlParameters parameters);
+    void OnFibAddNextHopFailure(const ndn::mgmt::ControlResponse response);
+    void OnFaceCreateSuccess(const ndn::nfd::ControlParameters parameters, const std::string &PrefixNameStr);
+    void OnFaceCreateFailure(const ndn::mgmt::ControlResponse response);
 };

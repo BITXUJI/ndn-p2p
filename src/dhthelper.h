@@ -14,7 +14,7 @@ private:
     public:
         ~CGInstance()
         {
-            if(m_node != nullptr)
+            if (m_node != nullptr)
             {
                 m_node->join();
                 delete m_node;
@@ -23,13 +23,14 @@ private:
         }
     };
     static CGInstance gc;
+
 public:
-    static  dht::DhtRunner * getNode()
+    static dht::DhtRunner *getNode()
     {
         return m_node;
     }
-    void putValue(const std::string& key, const dht::Value& value);
-    void getValue(const std::string& key);
+    void putValue(const std::string &key, const dht::Value &value);
+    void getValue(const std::string &key);
 
 private:
     static dht::DhtRunner *m_node;
