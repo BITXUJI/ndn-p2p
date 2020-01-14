@@ -15,8 +15,8 @@ def configure(conf):
 def build(bld):
     bld.program(
         features ='cxx',
-        target='consumer', # 生成的可执行文件名
-        source=bld.path.ant_glob(['src/*.cpp', 'src/consumer/*.cpp']),
+        target='client-test', # 生成的可执行文件名
+        source=bld.path.ant_glob(['src/*.cpp', 'src/client/*.cpp']),
         includes = "./src",
         use='NDN_CXX OPENDHT GNUTLS',# 使用的库名
         #use=['NDN_CXX','OPENDHT','GNUTLS'],
@@ -24,8 +24,8 @@ def build(bld):
 
     bld.program(
         features='cxx',
-        target='Producer',
-        source=bld.path.ant_glob(['src/producer/*.cpp']),
-        includes = "./src/producer",
+        target='server-test',
+        source=bld.path.ant_glob(['src/server/*.cpp']),
+        includes = "./src",
         use='NDN_CXX OPENDHT GNUTLS',
     )
